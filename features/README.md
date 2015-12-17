@@ -1,7 +1,7 @@
 #Cucumber Test
 ------
 
-##This test is making posts onto tumblr from the scenarios from the feature file.
+##This test is making posts onto tumblr from the scenarios written within the feature file.
 ------
 
 - Open Command Prompt
