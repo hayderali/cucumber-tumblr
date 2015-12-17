@@ -1,0 +1,7 @@
+task :report do
+	system 'cucumber -f pretty -f html --out report.html -f rerun'
+end
+
+task :no_report do
+  system 'cucumber'
+end

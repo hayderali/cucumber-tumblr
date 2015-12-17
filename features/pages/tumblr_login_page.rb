@@ -22,4 +22,6 @@ class TumblrLoginPage < GenericPage
   def submit
     @browser.button(id: "signup_forms_submit").click
   end
+  
+  
 end

@@ -5,7 +5,7 @@ Feature: Posting a valid Text Post on Tumblr after login
     And I'm on my dashboard
     And I click on a text post
     
-  @posting
+  @wip
   Scenario: Posting a text post with just a title
     When I enter "Hello" into the title box
     And I click on the post button

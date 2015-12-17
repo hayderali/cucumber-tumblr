@@ -10,7 +10,7 @@ Before do
 end
 
 #After each @post scenario
-After ("@posting") do |scenario|
+After ("@wip") do |scenario|
  
   #delete post
   @browser.goto "http://www.tumblr.com/blog/deepesthologramtyphoon"

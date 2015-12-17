@@ -4,30 +4,27 @@ Given(/^I'm logged into Tumblr$/) do
   @tumblr = TumblrLoginPage.new @browser
   @tumblr.visit 
   @tumblr.login_field
+  @tumblr.submit
+  
   
 end
 
-Then(/^I am redirected to my tumblr dashboard page$/) do
-  @tumblr.submit
-end
-
 Given(/^I'm on my dashboard$/) do
-  expect(@browser.div(class: "post_avatar").a.id).to eq "post_controls_avatar"
+  @tumblr_post = PostingPage.new @browser
+  @tumblr_post.verify_dashboard
 end
-
 
 Given(/^I click on a text post$/) do
-  @browser.element(id: "new_post_label_text").click
+  @tumblr_post.text_post
 end
 
 #scenario 1
 When(/^I enter "([^"]*)" into the title box$/) do |title_message|
-  @browser.div(class: 'editor-plaintext').click
-  @browser.div(class: 'editor-plaintext').send_keys title_message
+  @tumblr_post.post_only_title title_message
 end
 
 When(/^I click on the post button$/) do
-  @browser.button(class: "create_post_button").click
+  @tumblr_post.submit 
 end
 
 Then(/^My dashboard should contain a text post with the title "([^"]*)"$/) do |title_message|
@@ -45,18 +42,12 @@ Then(/^My dashboard should contain a text post with the title "([^"]*)"$/) do |t
   end 
 end 
   
-  #expect(@browser.div(class: "post_title").text).to eq title_message
-  #expect(@browser.div(class: "post_body").text).to eq "nil"
-
 #scenario 2
-When(/^I enter "([^"]*)" into the message box$/) do |message|
-    
-  @browser.div(class: 'editor-richtext').click
-  @browser.div(class: 'editor-richtext').send_keys message
-
+When(/^I enter "([^"]*)" into the message box$/) do |message|  
+  @tumblr_post.post_only_message message
 end
 
-Then(/^My dashboard should contain a text post with the message "([^"]*)"$/) do                                                                                                                 |arg1|
+Then(/^My dashboard should contain a text post with the message "([^"]*)"$/) do                                                                                                            |arg1|
   
   @browser.driver.manage.timeouts.implicit_wait = 10
   @browser.goto "http://www.deepesthologramtyphoon.tumblr.com"
